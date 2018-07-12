@@ -1,27 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Guess
 {
     public class Program
     {
         private static List<char[]> allCombos = new List<char[]> { };
-        private static Names names = new Names();
+        private static List<string> allNames;
 
         public static void Main(string[] args)
         {
-            names.FetchList();
+            DoEverything();
 
-            //Console.WriteLine(names.allNames[1]);
+            Console.WriteLine("It's gonna be awhile...");
+            Console.ReadLine();
+        }
+        public static async void DoEverything()
+        {
+            allNames = await Names.FetchListAsync();
+            Console.WriteLine(allNames[30]);
 
             Combos(0, Blocks.allBlocks, "");
-            foreach(char[] item in allCombos)
+            foreach (char[] item in allCombos)
             {
                 Permute(item, Output);
             }
-
-            Console.WriteLine();
-            Console.ReadLine();
+            Console.WriteLine("Done!");
         }
 
         private static void Combos(int pos, char[][] c, String soFar)
@@ -47,15 +52,11 @@ namespace Guess
             {
                 tempName += item;
             }
-            foreach (string name in names.allNames)
+            foreach (string name in allNames)
             {
                 if (tempName.ToUpper() == name.ToUpper())
                 {
                     Console.WriteLine(tempName);
-                }
-                else
-                {
-                    Console.WriteLine("Nope");
                 }
             }
         }

@@ -3,21 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using AngleSharp;
 
 namespace Guess
 {
-    public class Names
+    public static class Names
     {
-        public string name { get; set; }
-        public List<string> allNames = new List<string> { };
-
-        public Names()
-        {
-            FetchList();
-        }
-
-        public async void FetchList()
+        public static async Task<List<string>> FetchListAsync()
         {
             var config = Configuration.Default.WithDefaultLoader();
             var address = "http://www.avss.ucsb.edu/NameFema.HTM";
@@ -27,12 +20,13 @@ namespace Guess
             var cells = document.QuerySelectorAll(cellSelector);
             var names = cells.Select(m => m.TextContent);
 
+            List<string> allNames = new List<string> { };
             foreach(string name in names)
             {
                 allNames.Add(name);
             }
 
-            return;
+            return allNames;
         }
     }
 }
