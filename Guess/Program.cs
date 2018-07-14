@@ -13,15 +13,14 @@ namespace Guess
         {
             DoEverything();
 
-            Console.WriteLine("It's gonna be awhile...");
+            Console.WriteLine("It's gonna be a bit...");
             Console.ReadLine();
         }
         public static async void DoEverything()
         {
             allNames = await Names.FetchListAsync();
-            Console.WriteLine(allNames[30]);
-
             Combos(0, Blocks.allBlocks, "");
+
             foreach (char[] item in allCombos)
             {
                 Permute(item, Output);
@@ -47,7 +46,7 @@ namespace Guess
         {
             string tempName = "";
 
-            //prints each character, looped, plus a newline at the end
+            //prints each character, looped
             foreach (T item in permutation)
             {
                 tempName += item;
