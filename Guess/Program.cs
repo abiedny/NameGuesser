@@ -50,12 +50,12 @@ namespace Guess
             foreach (T item in permutation)
             {
                 tempName += item;
-            }
-            foreach (string name in allNames)
-            {
-                if (tempName.ToUpper() == name.ToUpper())
+                foreach (string name in allNames)
                 {
-                    Console.WriteLine(tempName);
+                    if (tempName.ToUpper() == name.ToUpper())
+                    {
+                        Console.WriteLine(tempName);
+                    }
                 }
             }
         }
